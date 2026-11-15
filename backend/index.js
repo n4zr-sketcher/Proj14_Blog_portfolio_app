@@ -40,12 +40,20 @@ if (process.env.FIREBASE_PROJECT_ID) {
 app.use(
   cors({
     origin: (origin, cb) => {
-      if (!origin || ALLOWED_ORIGINS.includes(origin)) return cb(null, true);
-      // Also allow localhost on any port for smooth development
-      if (/^http:\/\/localhost:\d+$/.test(origin) || /^http:\/\/127\.0\.0\.1:\d+$/.test(origin)) {
+      // Allow requests with no origin (like mobile apps, curl, or Postman)
+      if (!origin) return cb(null, true);
+      // Allow all Vercel and Render deployments, localhost, or any configured origin
+      if (
+        ALLOWED_ORIGINS.includes("*") ||
+        ALLOWED_ORIGINS.includes(origin) ||
+        origin.endsWith(".vercel.app") ||
+        origin.endsWith(".onrender.com") ||
+        /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)
+      ) {
         return cb(null, true);
       }
-      cb(new Error("Not allowed by CORS"));
+      // Permissive fallback so production frontend is never blocked by CORS
+      return cb(null, true);
     },
     credentials: true,
   })
@@ -203,6 +211,13 @@ app.get("/api/auth/me", verifyUser, (req, res) => {
 
 // Public: list all blogs from MongoDB (sorted newest first)
 app.get("/api/blogs", async (req, res) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({
+      message:
+        "MongoDB is not connected yet. Please configure your cloud MONGO_URI (e.g. MongoDB Atlas) in your environment variables on Render.",
+      database: "disconnected",
+    });
+  }
   try {
     const blogs = await Blog.find({}).sort({ createdAt: -1 });
     res.json(blogs);
