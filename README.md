@@ -98,14 +98,14 @@ node seed.js
 #### 🖥️ Terminal 1 - Backend Server:
 ```bash
 cd backend
-npm start
+npm run dev
 ```
-*Backend runs on: [http://localhost:5000](http://localhost:5000)*
+*(Or `npm start`) - runs on: [http://localhost:5000](http://localhost:5000)*
 
 #### 💻 Terminal 2 - Frontend Client:
 ```bash
 cd frontend
-npm start
+npm run dev
 ```
 *Frontend runs on: [http://localhost:3000](http://localhost:3000)*
 
