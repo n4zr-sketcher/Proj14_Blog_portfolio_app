@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/blogDB";
 
 // Admin users = Firebase accounts whose email is listed here (comma-separated)
-const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || "admin@blog.com,bhuvanaragavan28@gmail.com")
+const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || "admin@blog.com")
   .split(",")
   .map((e) => e.trim().toLowerCase())
   .filter(Boolean);

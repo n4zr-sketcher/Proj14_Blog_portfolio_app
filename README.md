@@ -76,34 +76,49 @@ Ensure you have the following installed on your machine:
 - [MongoDB](https://www.mongodb.com/try/download/community) running locally on port `27017` (or a MongoDB Atlas URI)
 
 ### 2. Install Dependencies
-Dependencies for both frontend and backend can be installed using the root command:
+Install dependencies separately in both directories:
 ```bash
-npm run install:all
-```
-*(Or install separately with `cd backend && npm install` and `cd ../frontend && npm install --legacy-peer-deps`)*
+# In backend
+cd backend
+npm install
 
-### 3. Seed MongoDB Database
+# In frontend
+cd ../frontend
+npm install --legacy-peer-deps
+```
+
+### 3. Seed MongoDB Database (Optional)
 To populate the database with initial tech blogs:
 ```bash
-npm run seed
+cd backend
+node seed.js
 ```
 
-### 4. Run Both Servers
-Start both backend (port 5000) and frontend (port 3000) simultaneously:
+### 4. Running the Project (2 Terminals Method)
+
+#### 🖥️ Terminal 1 - Backend Server:
 ```bash
+cd backend
 npm start
 ```
-- Frontend: [http://localhost:3000](http://localhost:3000)
-- Backend API: [http://localhost:5000](http://localhost:5000)
+*Backend runs on: [http://localhost:5000](http://localhost:5000)*
+
+#### 💻 Terminal 2 - Frontend Client:
+```bash
+cd frontend
+npm start
+```
+*Frontend runs on: [http://localhost:3000](http://localhost:3000)*
+
+*(Optional: You can also run both from the root directory with `npm start`)*
 
 ---
 
 ## 🔑 Authentication & Admin Setup
 
 ### Admin Credentials
-By default, the backend authorizes the following email addresses for Admin access:
+By default, the backend authorizes the following email address for Admin access:
 - `admin@blog.com`
-- `bhuvanaragavan28@gmail.com`
 
 You can add any other admin emails by editing `ADMIN_EMAILS` in `backend/.env`:
 ```env
