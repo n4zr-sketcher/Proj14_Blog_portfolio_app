@@ -61,8 +61,7 @@ PROJ FINAL EMC BLOG PORTFOLIO/
 │   ├── .env.example              # Frontend environment template
 │   ├── tailwind.config.js        # Tailwind CSS configuration
 │   └── package.json              # Frontend dependencies
-├── package.json                  # Root runner scripts
-├── start.js                      # Concurrently launches backend & frontend
+├── .gitignore                    # Git ignore file
 └── README.md                     # Documentation & setup guide
 ```
 
@@ -109,8 +108,6 @@ cd frontend
 npm start
 ```
 *Frontend runs on: [http://localhost:3000](http://localhost:3000)*
-
-*(Optional: You can also run both from the root directory with `npm start`)*
 
 ---
 
